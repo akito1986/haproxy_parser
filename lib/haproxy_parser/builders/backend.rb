@@ -4,12 +4,6 @@ require "haproxy_parser/builders/server_parser"
 module HaproxyParser
   module Builders
     class Backend < Base
-      attr_accessor :frontend
-      def initialize(section:, default: nil, frontend:)
-        super(section: section, default: default)
-        @frontend = frontend
-      end
-
       def mode
         @mode ||= dig_data("mode")
       end
@@ -23,14 +17,12 @@ module HaproxyParser
           if line_servers[0].is_a?(Array)
             line_servers.each do |line_server|
               arr << ServerParser.new(
-                line: line_server,
-                frontend_port: frontend.port
+                line: line_server
               )
             end
           else
             arr << ServerParser.new(
-              line: line_servers,
-              frontend_port: frontend.port
+              line: line_servers
             )
           end
         end
