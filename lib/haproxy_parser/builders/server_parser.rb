@@ -4,10 +4,9 @@ require "haproxy_parser/line_parser"
 module HaproxyParser
   module Builders
     class ServerParser
-      attr_reader :line, :frontend_port
-      def initialize(line:, frontend_port:)
+      attr_reader :line
+      def initialize(line:)
         @line = line
-        @frontend_port = frontend_port
       end
 
       def name
@@ -19,12 +18,7 @@ module HaproxyParser
       end
 
       def port
-        @port ||=
-          if line[1].split(":")[1]
-            line[1].split(":")[1]
-          else
-            frontend_port
-          end
+        @port ||= line[1].split(":")[1]
       end
 
       %w(inter rise fall).each do |attr|

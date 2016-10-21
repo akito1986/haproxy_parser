@@ -65,8 +65,7 @@ module HaproxyParser
       return find_backend(name) if find_backend(name).present?
       built_backend = HaproxyParser::Builders::Backend.new(
         section: backend_section(name).items,
-        default: default_section_items,
-        frontend: frontend
+        default: default_section_items
       ).tap do |backend|
         backends << backend
       end
