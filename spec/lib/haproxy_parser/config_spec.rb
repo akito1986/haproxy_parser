@@ -33,6 +33,10 @@ describe HaproxyParser::Config do
       it "get value in frontend section" do
         expect(subject.frontends[0].port).to eq("5000")
       end
+
+      it "the number of servers is correct" do
+        expect(subject.servers.size).to eq(4)
+      end
     end
 
     context "Given parameter in defaults section" do

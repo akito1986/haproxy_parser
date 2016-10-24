@@ -6,7 +6,7 @@ require "haproxy_parser/builders"
 module HaproxyParser
   class Config
     SECTIONS = %w(global defaults frontend backend)
-    attr_reader :path
+    attr_reader :path, :servers
     def initialize(path)
       @path = path
     end
@@ -40,6 +40,7 @@ module HaproxyParser
     def build
       build_global
       build_frontend_backend
+      build_servers
     end
 
     def build_global
@@ -57,6 +58,15 @@ module HaproxyParser
         built_backend = build_backend(built_frontend)
         built_frontend.backend = built_backend
         frontends << built_frontend
+      end
+    end
+
+    def build_servers
+      @servers = [].tap do |arr|
+        backends.each do |backend|
+          arr += backend.servers
+        end
+        break arr
       end
     end
 
