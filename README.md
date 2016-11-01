@@ -66,7 +66,7 @@ backend backend_http_80
 
 ## Check Format
 ```
-config = HaproxyParser.new(
+config = HaproxyParser::Config.new(
   haproxy_config_path
 ).check_format!
 ```
@@ -74,7 +74,7 @@ config = HaproxyParser.new(
 ### Execute Parse
 You can parse by calling method like below.
 ```
-config = HaproxyParser.new(
+config = HaproxyParser::Config.new(
   haproxy_config_path
 ).parse
 ```
