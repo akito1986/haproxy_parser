@@ -17,12 +17,14 @@ module HaproxyParser
           if line_servers[0].is_a?(Array)
             line_servers.each do |line_server|
               arr << ServerParser.new(
-                line: line_server
+                line: line_server,
+                backend_name: name
               )
             end
           else
             arr << ServerParser.new(
-              line: line_servers
+              line: line_servers,
+              backend_name: name
             )
           end
         end

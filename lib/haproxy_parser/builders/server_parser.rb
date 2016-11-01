@@ -4,9 +4,10 @@ require "haproxy_parser/line_parser"
 module HaproxyParser
   module Builders
     class ServerParser
-      attr_reader :line
-      def initialize(line:)
+      attr_reader :line, :backend_name
+      def initialize(line:, backend_name:)
         @line = line
+        @backend_name = backend_name
       end
 
       def name
