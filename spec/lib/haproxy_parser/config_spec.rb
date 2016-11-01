@@ -49,6 +49,10 @@ describe HaproxyParser::Config do
       it "get default value" do
         expect(subject.frontends[0].backend.servers[0].inter).to eq("2000ms")
       end
+
+      it "get correct backend_name" do
+        expect(subject.frontends[0].backend.servers[0].backend_name).to eq("backend_http_8080")
+      end
     end
   end
 
